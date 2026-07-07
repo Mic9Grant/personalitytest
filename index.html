@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Ideal Fit Personality Assessment (CIFPA) 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- HTML2PDF for PDF Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                        secondary: '#10B981',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; color: #1E293B; }
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .scale-btn { transition: all 0.2s ease; }
+        .scale-btn:hover { transform: translateY(-2px); }
+        .scale-btn.selected { background-color: #4F46E5; color: white; border-color: #4F46E5; box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.4); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+            .glass-panel { box-shadow: none; border: none; }
+        }
+        
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative">
+
+    <!-- Background Decoration -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-100/50 blur-3xl"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-teal-100/50 blur-3xl"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50 no-print">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="ph-fill ph-compass text-primary text-3xl mr-2"></i>
+                    <span class="font-bold text-xl tracking-tight text-slate-800">CIFPA 2026</span>
+                </div>
+                <div class="flex items-center" id="nav-progress-container" style="display: none;">
+                    <span class="text-sm font-medium text-slate-500 mr-4">Progress: <span id="nav-progress-text">0%</span></span>
+                    <div class="w-32 sm:w-48 h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div id="nav-progress-bar" class="h-full bg-primary transition-all duration-300 w-0"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 w-full max-w-5xl mx-auto">
+        
+        <!-- ================= INTRO SCREEN ================= -->
+        <div id="intro-screen" class="glass-panel w-full rounded-2xl shadow-xl p-8 sm:p-12 fade-in">
+            <div class="text-center mb-8">
+                <span class="inline-block py-1 px-3 rounded-full bg-indigo-100 text-primary text-sm font-semibold tracking-wide mb-4">2026 EDITION</span>
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-6 leading-tight">Career Ideal Fit <br class="hidden sm:block"/> Personality Assessment</h1>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto mb-8">
+                    Discover careers where you will thrive, feel fulfilled, and achieve long-term success. This 250-question comprehensive guide incorporates today's realities: AI integration, hybrid work, purpose-driven careers, and sustainability.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                    <i class="ph ph-brain text-3xl text-indigo-500 mb-3"></i>
+                    <h3 class="font-semibold text-slate-800 mb-2">Modern Frameworks</h3>
+                    <p class="text-sm text-slate-600">Combines Big Five & RIASEC theories updated for 2026 career paradigms.</p>
+                </div>
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                    <i class="ph ph-chart-polar text-3xl text-teal-500 mb-3"></i>
+                    <h3 class="font-semibold text-slate-800 mb-2">Deep Analytics</h3>
+                    <p class="text-sm text-slate-600">Analyzes 5 dimensions: Environment, Skills, Values, Personality, and Interests.</p>
+                </div>
+                <div class="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                    <i class="ph ph-briefcase text-3xl text-blue-500 mb-3"></i>
+                    <h3 class="font-semibold text-slate-800 mb-2">Future-Ready Jobs</h3>
+                    <p class="text-sm text-slate-600">Matches you with emerging roles in AI, climate tech, and hybrid leadership.</p>
+                </div>
+            </div>
+
+            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-lg mb-10">
+                <div class="flex">
+                    <div class="flex-shrink-0"><i class="ph ph-info text-amber-500 text-xl"></i></div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-amber-800">Instructions</h3>
+                        <p class="text-sm text-amber-700 mt-1">
+                            Rate how much you agree with each statement on a scale of 1 (Strongly Disagree) to 5 (Strongly Agree). Be honest—there are no right or wrong answers. Estimated time: 20-30 minutes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="startAssessment()" class="bg-primary hover:bg-indigo-700 text-white text-lg font-semibold py-4 px-10 rounded-xl shadow-lg shadow-indigo-200 transition-all transform hover:-translate-y-1">
+                    Start Assessment <i class="ph ph-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= ASSESSMENT SCREEN ================= -->
+        <div id="assessment-screen" class="w-full hidden pb-20">
+            <div id="section-header" class="mb-8 text-center fade-in">
+                <h2 class="text-3xl font-bold text-slate-900" id="section-title">Section Title</h2>
+                <p class="text-slate-500 mt-2" id="section-desc">Section Description</p>
+            </div>
+
+            <div id="questions-container" class="space-y-6">
+                <!-- Questions injected here via JS -->
+            </div>
+
+            <!-- Controls -->
+            <div class="mt-10 flex items-center justify-between glass-panel p-4 rounded-xl fixed bottom-4 sm:bottom-8 left-4 right-4 sm:left-1/2 sm:-translate-x-1/2 sm:w-[90%] max-w-5xl shadow-xl border border-slate-200 z-40">
+                <button onclick="prevPage()" id="btn-prev" class="px-6 py-2.5 rounded-lg font-medium text-slate-600 hover:bg-slate-100 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i class="ph ph-arrow-left mr-2"></i> Previous
+                </button>
+                <div class="text-sm font-semibold text-slate-500" id="pagination-info">Page 1 of 25</div>
+                <button onclick="nextPage()" id="btn-next" class="px-6 py-2.5 rounded-lg font-medium bg-primary text-white hover:bg-indigo-700 transition-colors flex items-center shadow-md">
+                    Next <i class="ph ph-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= RESULTS SCREEN ================= -->
+        <div id="results-screen" class="w-full hidden fade-in">
+            <!-- Action Bar (No Print) -->
+            <div class="flex justify-between items-center mb-6 no-print">
+                <h2 class="text-2xl font-bold text-slate-800">Your CIFPA 2026 Results</h2>
+                <button onclick="downloadPDF()" class="bg-slate-800 hover:bg-slate-900 text-white px-5 py-2.5 rounded-lg shadow font-medium flex items-center transition-colors">
+                    <i class="ph ph-download-simple mr-2"></i> Save PDF Report
+                </button>
+            </div>
+
+            <!-- Report Container (Printed area) -->
+            <div id="printable-report" class="bg-white rounded-2xl shadow-xl p-8 sm:p-12 mb-10 border border-slate-100">
+                
+                <!-- Report Header -->
+                <div class="border-b border-slate-200 pb-8 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center">
+                    <div>
+                        <h1 class="text-4xl font-extrabold text-primary mb-2">Career Ideal Fit Profile</h1>
+                        <p class="text-slate-500 text-lg">2026 Comprehensive Analysis</p>
+                    </div>
+                    <div class="text-right mt-4 md:mt-0 text-sm text-slate-400">
+                        <p>Date Generated: <span id="report-date" class="font-medium text-slate-700"></span></p>
+                        <p>Assessment Tool: CIFPA 2026 Edition</p>
+                    </div>
+                </div>
+
+                <!-- Executive Summary -->
+                <div class="mb-12">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center"><i class="ph-fill ph-sparkle text-amber-500 mr-2"></i> Executive Summary</h3>
+                    <p class="text-slate-700 leading-relaxed text-lg" id="executive-summary-text">
+                        Generating your personalized summary based on 250 data points...
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+                    
+                    <!-- Section 1: Work Environment -->
+                    <div class="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                        <h3 class="font-bold text-lg text-slate-800 mb-4 border-b pb-2">Work Environment & Style</h3>
+                        <div id="chart-env" class="space-y-4"></div>
+                    </div>
+
+                    <!-- Section 2: Skills & Strengths -->
+                    <div class="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                        <h3 class="font-bold text-lg text-slate-800 mb-4 border-b pb-2">Core Strengths & Aptitudes</h3>
+                        <div id="chart-skills" class="space-y-4"></div>
+                    </div>
+
+                    <!-- Section 3: Values & Purpose -->
+                    <div class="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                        <h3 class="font-bold text-lg text-slate-800 mb-4 border-b pb-2">Values & Core Motivators</h3>
+                        <div id="chart-values" class="space-y-4"></div>
+                    </div>
+
+                    <!-- Section 4: Personality (Big Five) -->
+                    <div class="bg-slate-50 rounded-xl p-6 border border-slate-100">
+                        <h3 class="font-bold text-lg text-slate-800 mb-4 border-b pb-2">Personality Traits (Big 5)</h3>
+                        <div id="chart-personality" class="space-y-4"></div>
+                    </div>
+                    
+                    <!-- Section 5: Interests (RIASEC) -->
+                    <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 md:col-span-2">
+                        <h3 class="font-bold text-lg text-slate-800 mb-4 border-b pb-2">Career Interests (RIASEC Profile)</h3>
+                        <div id="chart-riasec" class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4"></div>
+                    </div>
+                </div>
+
+                <!-- Career Recommendations -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center">
+                        <i class="ph-fill ph-rocket-launch text-primary mr-3"></i> 2026 Top Career Matches
+                    </h3>
+                    <p class="text-slate-600 mb-6">Based on your unique combination of traits, strengths, and the evolving macroeconomic landscape, we recommend exploring the following paths:</p>
+                    
+                    <div id="career-recommendations" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Next Steps & Disclaimer -->
+                <div class="bg-slate-800 text-white rounded-xl p-6 mt-10">
+                    <h4 class="font-bold text-lg mb-2">Next Steps & Disclaimer</h4>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        This assessment is a self-reflection tool for personal guidance only and is not a substitute for professional career counseling, psychological assessment, or vocational testing. Results should be considered alongside your education, experience, market trends, and personal circumstances. For the most accurate insights, review your results with a certified career coach or use this as a starting point for informational interviews in fields that score highly.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="text-center pb-20 no-print">
+                 <button onclick="location.reload()" class="text-slate-500 hover:text-slate-800 font-medium underline">Start Over</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Error Toast -->
+    <div id="error-toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+        Please answer all questions on this page before continuing.
+    </div>
+
+    <script>
+        // --- DATA LAYER: THE 250 QUESTIONS ---
+        // Categories:
+        // S1: autonomy, structure, innovation, hybrid
+        // S2: analytical, creative, leadership, technical, communication
+        // S3: impact, wealth, growth, balance, recognition
+        // S4: openness, conscientiousness, extraversion, agreeableness, emotional_stability
+        // S5: realistic, investigative, artistic, social, enterprising, conventional
+
+        const rawQuestionsData = [
+            // ================= SECTION 1: Work Environment & Preferences (50 Questions) =================
+            // Original 20
+            { sec: 1, trait: 'hybrid', text: "I prefer a quiet, distraction-free workspace over a busy collaborative open office." },
+            { sec: 1, trait: 'structure', text: "I enjoy brainstorming ideas and collaborating closely with colleagues on a daily basis." },
+            { sec: 1, trait: 'hybrid', text: "Working remotely or in a hybrid schedule significantly boosts my productivity and satisfaction." },
+            { sec: 1, trait: 'structure', text: "I like having a clear organizational hierarchy with defined roles and reporting lines." },
+            { sec: 1, trait: 'innovation', text: "Variety in tasks and frequent changes keep me motivated and prevent boredom." },
+            { sec: 1, trait: 'innovation', text: "I perform at my best in fast-paced environments with tight deadlines and high stakes." },
+            { sec: 1, trait: 'structure', text: "Predictable schedules, stability, and minimal surprises are important for my well-being." },
+            { sec: 1, trait: 'innovation', text: "I actively seek out environments that encourage innovation, experimentation, and calculated risk-taking." },
+            { sec: 1, trait: 'structure', text: "Physical office perks such as a gym, free meals, or on-site childcare matter more to me than full remote flexibility." },
+            { sec: 1, trait: 'autonomy', text: "I prefer leading projects and taking ownership rather than supporting others' initiatives." },
+            { sec: 1, trait: 'innovation', text: "Multicultural, diverse, and inclusive teams energize me and improve my performance." },
+            { sec: 1, trait: 'autonomy', text: "I strongly dislike micromanagement and require high levels of autonomy to thrive." },
+            { sec: 1, trait: 'innovation', text: "Travel for work, client meetings, or conferences excites and motivates me." },
+            { sec: 1, trait: 'autonomy', text: "I thrive in results-only work environments where outcomes matter more than hours logged." },
+            { sec: 1, trait: 'structure', text: "Job security, comprehensive benefits, pensions, and long-term stability are top priorities." },
+            { sec: 1, trait: 'autonomy', text: "I enjoy mentoring, training, or coaching others as a regular part of my role." },
+            { sec: 1, trait: 'innovation', text: "Fast-changing industries and emerging technologies (like AI and biotech) motivate me to stay current." },
+            { sec: 1, trait: 'innovation', text: "I prefer the dynamic energy of small startups or scale-ups over large established corporations." },
+            { sec: 1, trait: 'hybrid', text: "Strong work-life boundaries, flexible hours, and personal time are non-negotiable for me." },
+            { sec: 1, trait: 'autonomy', text: "I enjoy roles that involve public speaking, presentations, or facilitating workshops." },
+            // New 30 for Section 1
+            { sec: 1, trait: 'hybrid', text: "I am highly effective at communicating asynchronously via tools like Slack or Teams without needing live meetings." },
+            { sec: 1, trait: 'autonomy', text: "I prefer to set my own daily agenda rather than having a manager assign my tasks." },
+            { sec: 1, trait: 'innovation', text: "I am comfortable pivoting strategies entirely if data suggests a new approach is better." },
+            { sec: 1, trait: 'structure', text: "I appreciate detailed Standard Operating Procedures (SOPs) to guide my daily work." },
+            { sec: 1, trait: 'hybrid', text: "I prefer a 4-day work week with intensive focus over a standard 5-day distributed schedule." },
+            { sec: 1, trait: 'autonomy', text: "I like being evaluated purely on project completion rather than processes followed." },
+            { sec: 1, trait: 'innovation', text: "Working on the cutting edge of industry disruption excites me." },
+            { sec: 1, trait: 'structure', text: "I feel most secure when my career path within a company is mapped out for the next 5 years." },
+            { sec: 1, trait: 'hybrid', text: "Digital nomadism or the ability to work from anywhere in the world is a major goal for me." },
+            { sec: 1, trait: 'autonomy', text: "I often find myself identifying inefficiencies and implementing my own solutions without being asked." },
+            { sec: 1, trait: 'innovation', text: "I prefer environments where failure is seen as a necessary step for learning." },
+            { sec: 1, trait: 'structure', text: "I value an environment where decisions are made by a committee or board rather than individuals." },
+            { sec: 1, trait: 'hybrid', text: "I find virtual collaboration tools (Miro, Figma, etc.) just as effective as in-person whiteboarding." },
+            { sec: 1, trait: 'autonomy', text: "I would enjoy functioning as a 'team of one' or a highly specialized solo contributor." },
+            { sec: 1, trait: 'innovation', text: "I actively follow tech trends and try to implement new tools (like ChatGPT/Copilot) into my workflow immediately." },
+            { sec: 1, trait: 'structure', text: "I prefer working in established, regulated industries (like finance or healthcare) over the wild west of tech startups." },
+            { sec: 1, trait: 'hybrid', text: "I require an environment that aggressively protects focus time and limits 'always-on' culture." },
+            { sec: 1, trait: 'autonomy', text: "I want the authority to manage my own budget for software, tools, and professional development." },
+            { sec: 1, trait: 'innovation', text: "I am drawn to decentralized organizations (DAOs) or flat management structures." },
+            { sec: 1, trait: 'structure', text: "I value strict adherence to company culture and established corporate values." },
+            { sec: 1, trait: 'hybrid', text: "I prefer co-working spaces to dedicated corporate offices." },
+            { sec: 1, trait: 'autonomy', text: "I enjoy the pressure of being the final decision-maker on critical issues." },
+            { sec: 1, trait: 'innovation', text: "I want to work in an environment where cross-departmental collaboration is mandatory." },
+            { sec: 1, trait: 'structure', text: "I prefer roles where the expectations stay consistent year over year." },
+            { sec: 1, trait: 'hybrid', text: "I find managing a geographically distributed team appealing." },
+            { sec: 1, trait: 'autonomy', text: "I like to challenge the status quo and push back on management if I disagree." },
+            { sec: 1, trait: 'innovation', text: "I thrive when working on 'moonshot' projects with low probabilities of success but huge potential impact." },
+            { sec: 1, trait: 'structure', text: "I prefer having clear, metric-driven KPIs assigned to me by leadership." },
+            { sec: 1, trait: 'hybrid', text: "I would sacrifice a percentage of my salary to guarantee permanent remote work." },
+            { sec: 1, trait: 'autonomy', text: "I see myself eventually launching my own agency, consultancy, or startup." },
+
+            // ================= SECTION 2: Skills, Strengths & Aptitudes (50 Questions) =================
+            // Original 20
+            { sec: 2, trait: 'analytical', text: "I am highly analytical and genuinely enjoy solving complex problems using data and logic." },
+            { sec: 2, trait: 'creative', text: "I have strong creative and artistic abilities that I want to apply directly in my career." },
+            { sec: 2, trait: 'leadership', text: "I excel at organizing people, resources, timelines, and processes to achieve ambitious goals." },
+            { sec: 2, trait: 'technical', text: "Technical skills such as coding, engineering, or working with complex systems come naturally to me." },
+            { sec: 2, trait: 'communication', text: "I am an excellent writer, editor, or communicator who enjoys crafting clear messages." },
+            { sec: 2, trait: 'leadership', text: "I have a natural talent for understanding emotions, reading people, and building rapport." },
+            { sec: 2, trait: 'analytical', text: "I am extremely detail-oriented and consistently catch errors or inconsistencies others miss." },
+            { sec: 2, trait: 'technical', text: "I can quickly learn and master new software, tools, platforms, or technologies." },
+            { sec: 2, trait: 'communication', text: "I am persuasive, confident, and skilled at selling ideas, products, or services to others." },
+            { sec: 2, trait: 'technical', text: "I enjoy hands-on, practical work such as building, repairing, assembling, or crafting physical things." },
+            { sec: 2, trait: 'leadership', text: "Strategic thinking, long-term planning, and seeing the big picture are among my greatest strengths." },
+            { sec: 2, trait: 'communication', text: "I am empathetic, patient, and highly skilled at conflict resolution and mediation." },
+            { sec: 2, trait: 'analytical', text: "I have strong mathematical, quantitative, statistical, or financial analysis abilities." },
+            { sec: 2, trait: 'creative', text: "I can visualize, conceptualize, and design aesthetically pleasing or functional creations." },
+            { sec: 2, trait: 'communication', text: "I am comfortable and effective with public speaking, presenting, or leading group discussions." },
+            { sec: 2, trait: 'leadership', text: "I excel at managing multiple competing projects, priorities, and deadlines simultaneously." },
+            { sec: 2, trait: 'analytical', text: "I have a talent for deep research, gathering information, and synthesizing insights from many sources." },
+            { sec: 2, trait: 'technical', text: "I am physically coordinated, dexterous, and good at practical or mechanical tasks." },
+            { sec: 2, trait: 'leadership', text: "I can motivate, inspire, and bring out the best in teams or individuals I work with." },
+            { sec: 2, trait: 'technical', text: "I am proficient with digital tools and adapt rapidly to new technologies and platforms." },
+            // New 30 for Section 2
+            { sec: 2, trait: 'analytical', text: "I excel at taking large datasets and finding the actionable narrative hidden within them." },
+            { sec: 2, trait: 'creative', text: "I frequently generate unconventional solutions to problems that stump others." },
+            { sec: 2, trait: 'leadership', text: "I naturally assume the role of coordinator when placed in unorganized group settings." },
+            { sec: 2, trait: 'technical', text: "I understand how artificial intelligence models work and how to prompt them effectively." },
+            { sec: 2, trait: 'communication', text: "I can translate highly technical jargon into simple concepts for non-technical stakeholders." },
+            { sec: 2, trait: 'analytical', text: "I am adept at A/B testing, running experiments, and drawing statistical conclusions." },
+            { sec: 2, trait: 'creative', text: "I have a strong eye for branding, typography, color theory, and visual aesthetics." },
+            { sec: 2, trait: 'leadership', text: "I am skilled at navigating corporate politics and building cross-functional alliances." },
+            { sec: 2, trait: 'technical', text: "I enjoy troubleshooting complex hardware or network infrastructure issues." },
+            { sec: 2, trait: 'communication', text: "I am a skilled negotiator who can find win-win solutions in high-stakes situations." },
+            { sec: 2, trait: 'analytical', text: "I am proficient at using advanced spreadsheet functions (macros, pivot tables, complex formulas)." },
+            { sec: 2, trait: 'creative', text: "I can quickly draft compelling narratives, scripts, or marketing copy." },
+            { sec: 2, trait: 'leadership', text: "I am highly capable at crisis management and making decisions under severe pressure." },
+            { sec: 2, trait: 'technical', text: "I understand principles of cybersecurity and digital privacy best practices." },
+            { sec: 2, trait: 'communication', text: "I am an active listener who makes others feel heard and understood." },
+            { sec: 2, trait: 'analytical', text: "I excel at financial modeling, forecasting, or budgeting." },
+            { sec: 2, trait: 'creative', text: "I enjoy user experience (UX) design and mapping out seamless digital journeys." },
+            { sec: 2, trait: 'leadership', text: "I am skilled at recruiting, interviewing, and identifying top talent." },
+            { sec: 2, trait: 'technical', text: "I have experience with or a strong aptitude for no-code/low-code development platforms." },
+            { sec: 2, trait: 'communication', text: "I am adept at managing public relations or social media community engagement." },
+            { sec: 2, trait: 'analytical', text: "I enjoy conducting market research and competitive analysis." },
+            { sec: 2, trait: 'creative', text: "I can take a vague concept and turn it into a concrete prototype or mockup." },
+            { sec: 2, trait: 'leadership', text: "I excel at giving constructive feedback that improves performance without causing resentment." },
+            { sec: 2, trait: 'technical', text: "I understand cloud computing architecture (AWS, Azure, GCP) at a foundational level." },
+            { sec: 2, trait: 'communication', text: "I am highly persuasive in written formats, such as email pitches or grant proposals." },
+            { sec: 2, trait: 'analytical', text: "I am skilled at root-cause analysis—finding the underlying reason a process failed." },
+            { sec: 2, trait: 'creative', text: "I enjoy video editing, audio production, or multimedia content creation." },
+            { sec: 2, trait: 'leadership', text: "I can effectively manage the transition process when a company implements major changes." },
+            { sec: 2, trait: 'technical', text: "I am proficient at building automations (e.g., Zapier, Make) to streamline workflows." },
+            { sec: 2, trait: 'communication', text: "I excel at moderating panels, hosting podcasts, or leading live Q&A sessions." },
+
+            // ================= SECTION 3: Values, Motivations & Purpose (50 Questions) =================
+            // Original 20
+            { sec: 3, trait: 'impact', text: "Making a meaningful positive social, environmental, or community impact is essential in my ideal career." },
+            { sec: 3, trait: 'wealth', text: "Earning a high income, financial rewards, bonuses, and wealth-building opportunities strongly drive my choices." },
+            { sec: 3, trait: 'growth', text: "Continuous learning, skill development, intellectual growth, and personal mastery are my top career priorities." },
+            { sec: 3, trait: 'recognition', text: "Recognition, awards, status, promotions, and being acknowledged for achievements matter greatly to me." },
+            { sec: 3, trait: 'impact', text: "Helping others succeed, mentoring, or contributing to people's well-being and growth deeply fulfills me." },
+            { sec: 3, trait: 'impact', text: "My career must align closely with my personal ethics, values, and sense of right and wrong." },
+            { sec: 3, trait: 'recognition', text: "Healthy competition, outperforming peers, and winning are strong motivators for me." },
+            { sec: 3, trait: 'balance', text: "Long-term stability, predictable income, benefits, and retirement security are very important." },
+            { sec: 3, trait: 'growth', text: "I need my work to be intellectually stimulating, challenging, and mentally engaging every day." },
+            { sec: 3, trait: 'recognition', text: "Gaining fame, influence, or being widely known and respected in my field appeals to me." },
+            { sec: 3, trait: 'balance', text: "Family time, personal relationships, hobbies, and life outside work take clear precedence over career advancement." },
+            { sec: 3, trait: 'growth', text: "I want a career that allows me to express my creativity, originality, and unique ideas freely." },
+            { sec: 3, trait: 'growth', text: "Adventure, international travel, new cultural experiences, and variety through work excite me." },
+            { sec: 3, trait: 'balance', text: "A strong sense of teamwork, camaraderie, belonging, and supportive colleagues is vital." },
+            { sec: 3, trait: 'impact', text: "Sustainability, climate action, environmental responsibility, and green initiatives are important to me." },
+            { sec: 3, trait: 'growth', text: "I am driven by the desire to innovate, invent, create new products/services, or push boundaries." },
+            { sec: 3, trait: 'recognition', text: "Prestigious job titles, impressive resumes, and visible career progression are key markers of success." },
+            { sec: 3, trait: 'growth', text: "I want a career involving cutting-edge technology, artificial intelligence, automation, or future-shaping innovations." },
+            { sec: 3, trait: 'balance', text: "Mental health support, wellness programs, psychological safety, and work-life wellness in a company matter a lot." },
+            { sec: 3, trait: 'growth', text: "I am motivated by the freedom to set my own goals, choose my methods, and control my pace and direction." },
+            // New 30 for Section 3
+            { sec: 3, trait: 'impact', text: "I want my daily work to directly contribute to solving global challenges (e.g., UN Sustainable Development Goals)." },
+            { sec: 3, trait: 'wealth', text: "I prefer compensation structures heavily weighted toward equity, stock options, or performance commissions." },
+            { sec: 3, trait: 'growth', text: "I view career setbacks primarily as valuable data points for my personal evolution." },
+            { sec: 3, trait: 'recognition', text: "I am motivated by being seen as a 'thought leader' or top expert in my niche." },
+            { sec: 3, trait: 'balance', text: "I would take a significant pay cut if it meant less stress and more predictable hours." },
+            { sec: 3, trait: 'impact', text: "Corporate Social Responsibility (CSR) is a primary factor when evaluating potential employers." },
+            { sec: 3, trait: 'wealth', text: "Reaching a state of early financial independence/retire early (FIRE) is my ultimate goal." },
+            { sec: 3, trait: 'growth', text: "I budget substantial time and money for my own upskilling, courses, and certifications." },
+            { sec: 3, trait: 'recognition', text: "I want to work for a globally recognized, 'Fortune 500' style prestigious brand." },
+            { sec: 3, trait: 'balance', text: "I prioritize employers that offer generous parental leave and family-first policies." },
+            { sec: 3, trait: 'impact', text: "I believe technology should be developed ethically, even if it sacrifices short-term profit." },
+            { sec: 3, trait: 'wealth', text: "I am willing to work extremely long hours in my 20s/30s to secure massive wealth." },
+            { sec: 3, trait: 'growth', text: "I am drawn to 'portfolio careers'—having multiple diverse streams of income and projects." },
+            { sec: 3, trait: 'recognition', text: "Being invited to speak at major industry conferences is a key career aspiration." },
+            { sec: 3, trait: 'balance', text: "I actively avoid roles that require being 'on-call' outside of normal working hours." },
+            { sec: 3, trait: 'impact', text: "I want my work to actively dismantle systemic inequalities or promote diversity and inclusion." },
+            { sec: 3, trait: 'wealth', text: "I track my net worth meticulously and let it guide my professional decisions." },
+            { sec: 3, trait: 'growth', text: "I get restless if I am not learning a completely new skill every 6 to 12 months." },
+            { sec: 3, trait: 'recognition', text: "I value having a large professional network and high visibility on platforms like LinkedIn." },
+            { sec: 3, trait: 'balance', text: "I believe the standard 40-hour work week is outdated and prefer employers testing shorter weeks." },
+            { sec: 3, trait: 'impact', text: "I am interested in the intersection of public policy, human rights, and business." },
+            { sec: 3, trait: 'wealth', text: "I view money primarily as a scorecard for my professional competence." },
+            { sec: 3, trait: 'growth', text: "I enjoy the process of 'reinventing' my career every few years." },
+            { sec: 3, trait: 'recognition', text: "Winning industry awards or accolades significantly boosts my job satisfaction." },
+            { sec: 3, trait: 'balance', text: "I evaluate potential bosses based on their empathy and respect for boundaries." },
+            { sec: 3, trait: 'impact', text: "I prefer working for nonprofits, NGOs, or certified B-Corporations." },
+            { sec: 3, trait: 'wealth', text: "I am comfortable taking significant financial risks if the potential upside is massive." },
+            { sec: 3, trait: 'growth', text: "I actively seek out mentors and also enjoy being a mentor to younger professionals." },
+            { sec: 3, trait: 'recognition', text: "Having a direct line to the CEO or executive board is important to me." },
+            { sec: 3, trait: 'balance', text: "I believe physical health and daily exercise should be integrated into the workday." },
+
+            // ================= SECTION 4: Personality Traits (Big Five) (50 Questions) =================
+            // Original 20
+            { sec: 4, trait: 'openness', text: "I am very open to new experiences, ideas, cultures, and unconventional ways of doing things." },
+            { sec: 4, trait: 'conscientiousness', text: "I am highly organized, reliable, disciplined, and consistently deliver high-quality work on time." },
+            { sec: 4, trait: 'extraversion', text: "I am outgoing, energetic, talkative, and feel energized by interacting with many people." },
+            { sec: 4, trait: 'agreeableness', text: "I am compassionate, trusting, cooperative, and genuinely care about others' feelings and needs." },
+            { sec: 4, trait: 'emotional_stability', text: "I rarely feel anxious, worried, or stressed about work performance, deadlines, or uncertainty." }, // Reversed to Positive for scoring
+            { sec: 4, trait: 'openness', text: "I enjoy abstract thinking, theoretical discussions, philosophy, and exploring big ideas." },
+            { sec: 4, trait: 'conscientiousness', text: "I plan carefully ahead, avoid procrastination, and follow through on commitments reliably." },
+            { sec: 4, trait: 'extraversion', text: "I prefer dynamic group activities and recharge best by being around others." }, // Adjusted
+            { sec: 4, trait: 'agreeableness', text: "I am tactful, polite, and prioritize maintaining harmony even when giving difficult feedback." }, // Adjusted
+            { sec: 4, trait: 'emotional_stability', text: "I recover quickly from setbacks, criticism, or failures and maintain an optimistic outlook." },
+            { sec: 4, trait: 'openness', text: "I deeply appreciate art, music, literature, beauty, and aesthetic experiences in daily life." },
+            { sec: 4, trait: 'conscientiousness', text: "I am thorough, meticulous, and pay exceptional attention to accuracy and details." },
+            { sec: 4, trait: 'extraversion', text: "I naturally take initiative in social situations, start conversations, and enjoy being around others." },
+            { sec: 4, trait: 'agreeableness', text: "I avoid conflict when possible and work hard to maintain harmony in relationships and teams." },
+            { sec: 4, trait: 'emotional_stability', text: "I remain calm and composed, rarely worrying about worst-case scenarios." }, // Reversed
+            { sec: 4, trait: 'openness', text: "I am naturally curious, ask many questions, and love understanding how and why things work." },
+            { sec: 4, trait: 'conscientiousness', text: "I am self-disciplined, stick to routines, and maintain consistent habits and standards." },
+            { sec: 4, trait: 'extraversion', text: "I feel comfortable and confident being the center of attention or speaking in front of groups." },
+            { sec: 4, trait: 'agreeableness', text: "I am helpful, generous with my time, and often go out of my way to support colleagues." },
+            { sec: 4, trait: 'emotional_stability', text: "I handle criticism constructively, use feedback to improve, and rarely take it personally." },
+            // New 30 for Section 4
+            { sec: 4, trait: 'openness', text: "I frequently seek out documentaries, podcasts, or books on topics completely unrelated to my field." },
+            { sec: 4, trait: 'conscientiousness', text: "I keep my digital workspace (files, emails, desktop) immaculately organized." },
+            { sec: 4, trait: 'extraversion', text: "I enjoy networking events and easily build connections with strangers." },
+            { sec: 4, trait: 'agreeableness', text: "I assume the best intentions in others, even when they make mistakes." },
+            { sec: 4, trait: 'emotional_stability', text: "I maintain steady focus and don't panic during sudden workplace crises." },
+            { sec: 4, trait: 'openness', text: "I enjoy debating controversial topics just to explore different perspectives." },
+            { sec: 4, trait: 'conscientiousness', text: "I strictly enforce my own deadlines, often finishing work days before it's due." },
+            { sec: 4, trait: 'extraversion', text: "Working alone in silence for extended periods drains my energy quickly." },
+            { sec: 4, trait: 'agreeableness', text: "I find it very difficult to say 'no' when a coworker asks for help." },
+            { sec: 4, trait: 'emotional_stability', text: "I am able to leave work stress at the office and not let it affect my personal life." },
+            { sec: 4, trait: 'openness', text: "I adapt very quickly when a completely new software system replaces an old one." },
+            { sec: 4, trait: 'conscientiousness', text: "I read contracts and instructions entirely before signing or proceeding." },
+            { sec: 4, trait: 'extraversion', text: "I tend to think out loud and process my ideas best by talking them through with others." },
+            { sec: 4, trait: 'agreeableness', text: "I am more concerned with group consensus than getting my own way." },
+            { sec: 4, trait: 'emotional_stability', text: "I rarely experience mood swings; my emotional state is generally consistent day-to-day." },
+            { sec: 4, trait: 'openness', text: "I prefer working on a project with vague guidelines where I can invent the rules." },
+            { sec: 4, trait: 'conscientiousness', text: "I am highly dependable; if I promise to do something, it gets done without fail." },
+            { sec: 4, trait: 'extraversion', text: "I am usually the one to organize team lunches, happy hours, or social events." },
+            { sec: 4, trait: 'agreeableness', text: "I am highly sympathetic to colleagues going through personal difficulties." },
+            { sec: 4, trait: 'emotional_stability', text: "I don't let feelings of imposter syndrome hold me back from taking on big challenges." },
+            { sec: 4, trait: 'openness', text: "I believe that continuous disruption in an industry is healthy and exciting." },
+            { sec: 4, trait: 'conscientiousness', text: "I review my work multiple times to ensure absolute perfection before submitting." },
+            { sec: 4, trait: 'extraversion', text: "I use expressive body language and a dynamic voice when communicating." },
+            { sec: 4, trait: 'agreeableness', text: "I readily compromise my own position to reach an agreement faster." },
+            { sec: 4, trait: 'emotional_stability', text: "I am comfortable with ambiguity and don't need all the answers before acting." },
+            { sec: 4, trait: 'openness', text: "I love exploring intersectional fields (e.g., combining psychology with data science)." },
+            { sec: 4, trait: 'conscientiousness', text: "I use robust task management systems (Notion, Asana, Jira) to track every detail of my life." },
+            { sec: 4, trait: 'extraversion', text: "I am quick to share my opinions in meetings, even with senior leadership present." },
+            { sec: 4, trait: 'agreeableness', text: "I believe collective success is far more important than individual glory." },
+            { sec: 4, trait: 'emotional_stability', text: "I am resilient to sudden changes in market conditions or corporate restructuring." },
+
+            // ================= SECTION 5: Career Interests & Passions (RIASEC) (50 Questions) =================
+            // Original 20
+            { sec: 5, trait: 'realistic', text: "I enjoy working with tools, machines, equipment, physical materials, or hands-on technical tasks." },
+            { sec: 5, trait: 'investigative', text: "I am drawn to investigating, researching, analyzing, experimenting, and solving scientific or technical puzzles." },
+            { sec: 5, trait: 'artistic', text: "I love expressing myself creatively through writing, visual design, music, performance, or storytelling." },
+            { sec: 5, trait: 'social', text: "I feel called to teach, counsel, coach, heal, or help people develop and reach their potential." },
+            { sec: 5, trait: 'enterprising', text: "I enjoy leading teams, persuading stakeholders, negotiating, selling, or driving business results." },
+            { sec: 5, trait: 'conventional', text: "I prefer structured, organized, detail-focused tasks such as data management, accounting, compliance, or administration." },
+            { sec: 5, trait: 'social', text: "A career in healthcare, therapy, counseling, patient care, or wellness services strongly appeals to me." },
+            { sec: 5, trait: 'investigative', text: "Building software, apps, websites, AI systems, or digital products excites and energizes me." },
+            { sec: 5, trait: 'realistic', text: "I want to work in environmental conservation, climate tech, renewable energy physical infrastructure." },
+            { sec: 5, trait: 'enterprising', text: "Marketing, branding, advertising, content strategy, or creating compelling campaigns appeals to me." },
+            { sec: 5, trait: 'conventional', text: "Finance, investing, economic analysis, fintech compliance, or wealth management interests me greatly." },
+            { sec: 5, trait: 'realistic', text: "Hands-on trades, engineering, construction, mechanics, or practical technical fields attract me." },
+            { sec: 5, trait: 'social', text: "I would thrive in education, training, academic research, curriculum development, or knowledge sharing." },
+            { sec: 5, trait: 'enterprising', text: "Entrepreneurship, founding a startup, being my own boss, or building something from scratch is a strong dream." },
+            { sec: 5, trait: 'investigative', text: "Law, policy development, advocacy research, or complex social justice work interests me." },
+            { sec: 5, trait: 'investigative', text: "Data science, artificial intelligence, machine learning, analytics, or emerging tech roles fascinate me." },
+            { sec: 5, trait: 'artistic', text: "Media, journalism, podcasting, video production, social media, or digital content creation appeals to me." },
+            { sec: 5, trait: 'social', text: "Human resources, talent acquisition, organizational development, or people operations suits my strengths." },
+            { sec: 5, trait: 'social', text: "Nonprofit work, community organizing, social impact, philanthropy, or mission-driven organizations call to me." },
+            { sec: 5, trait: 'conventional', text: "Project management, operations, logistics, supply chain, or coordinating complex initiatives is appealing." },
+            // New 30 for Section 5
+            { sec: 5, trait: 'realistic', text: "I am interested in precision manufacturing, robotics maintenance, or drone piloting." },
+            { sec: 5, trait: 'investigative', text: "I want to study longevity, biotech, genomics, or advanced medical research." },
+            { sec: 5, trait: 'artistic', text: "I am fascinated by generative AI design, prompt engineering for art, or virtual reality world-building." },
+            { sec: 5, trait: 'social', text: "I want to specialize in corporate mental health, well-being coaching, or burnout recovery." },
+            { sec: 5, trait: 'enterprising', text: "I am drawn to venture capital, angel investing, or startup incubator management." },
+            { sec: 5, trait: 'conventional', text: "I excel at auditing, ensuring regulatory compliance, or managing risk in large systems." },
+            { sec: 5, trait: 'realistic', text: "I enjoy the physical aspect of agriculture, sustainable farming, or forestry management." },
+            { sec: 5, trait: 'investigative', text: "I am interested in quantum computing, advanced physics, or space exploration technologies." },
+            { sec: 5, trait: 'artistic', text: "I enjoy UI/UX design, making digital platforms both beautiful and highly functional." },
+            { sec: 5, trait: 'social', text: "I want to design reskilling programs for workers displaced by automation." },
+            { sec: 5, trait: 'enterprising', text: "I thrive on hitting sales quotas, closing enterprise deals, or expanding market share." },
+            { sec: 5, trait: 'conventional', text: "I enjoy managing massive databases, ensuring data cleanliness and architecture integrity." },
+            { sec: 5, trait: 'realistic', text: "I would enjoy working as an urban planner, architect, or civil engineer." },
+            { sec: 5, trait: 'investigative', text: "I am fascinated by blockchain technology, cryptography, or decentralized finance mechanics." },
+            { sec: 5, trait: 'artistic', text: "I want to write scripts for video games, interactive media, or immersive entertainment." },
+            { sec: 5, trait: 'social', text: "I am passionate about eldercare tech, telemedicine coordination, or accessibility advocacy." },
+            { sec: 5, trait: 'enterprising', text: "I am interested in political campaigning, lobbying, or high-level strategic advisory." },
+            { sec: 5, trait: 'conventional', text: "I prefer working in quality assurance (QA), software testing, or systems verification." },
+            { sec: 5, trait: 'realistic', text: "I like working with IoT (Internet of Things) devices and physical sensor networks." },
+            { sec: 5, trait: 'investigative', text: "I enjoy analyzing climate models, carbon capture data, or ecological research." },
+            { sec: 5, trait: 'artistic', text: "I am drawn to fashion tech, sustainable materials design, or 3D printing art." },
+            { sec: 5, trait: 'social', text: "I want to work in diversity, equity, and inclusion (DEI) program management." },
+            { sec: 5, trait: 'enterprising', text: "I enjoy public relations, crisis management, or shaping public narratives for brands." },
+            { sec: 5, trait: 'conventional', text: "I am adept at corporate governance, paralegal work, or contract management." },
+            { sec: 5, trait: 'realistic', text: "I am interested in renewable energy installation (solar, wind, geothermal arrays)." },
+            { sec: 5, trait: 'investigative', text: "I enjoy solving complex cybersecurity puzzles, penetration testing, or threat hunting." },
+            { sec: 5, trait: 'artistic', text: "I want to be a creative director guiding the aesthetic vision of major brand campaigns." },
+            { sec: 5, trait: 'social', text: "I find joy in physical therapy, occupational therapy, or sports medicine rehabilitation." },
+            { sec: 5, trait: 'enterprising', text: "I am motivated by scaling operations, franchise development, or international expansion." },
+            { sec: 5, trait: 'conventional', text: "I enjoy calculating actuarial tables, insurance modeling, or statistical risk assessment." }
+        ];
+
+        // Format questions
+        const questions = rawQuestionsData.map((q, idx) => ({
+            id: idx + 1,
+            section: q.sec,
+            trait: q.trait,
+            text: q.text
+        }));
+
+        const sectionInfo = {
+            1: { title: "Section 1: Work Environment & Preferences", desc: "Exploring your ideal work setting, structure, pace, and conditions." },
+            2: { title: "Section 2: Skills, Strengths & Aptitudes", desc: "Identifying your natural talents and where you excel professionally." },
+            3: { title: "Section 3: Values, Motivations & Purpose", desc: "Revealing what truly drives and fulfills you in a career." },
+            4: { title: "Section 4: Personality Traits (Big Five)", desc: "Assessing core dimensions that influence career fit and satisfaction." },
+            5: { title: "Section 5: Career Interests & Passions", desc: "Exploring specific fields, activities, and emerging career directions." }
+        };
+
+        // --- STATE VARIABLES ---
+        let currentSection = 1;
+        let currentPage = 1;
+        const questionsPerPage = 10;
+        let answers = {}; // { questionId: value }
+        let totalPages = Math.ceil(questions.length / questionsPerPage);
+
+        // --- UI FUNCTIONS ---
+        function startAssessment() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('assessment-screen').classList.remove('hidden');
+            document.getElementById('nav-progress-container').style.display = 'flex';
+            renderPage();
+            updateProgress();
+        }
+
+        function renderPage() {
+            window.scrollTo(0, 0);
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            const startIndex = (currentPage - 1) * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, questions.length);
+            const pageQuestions = questions.slice(startIndex, endIndex);
+
+            // Update Header based on the first question of this page
+            const currentSecNum = pageQuestions[0].section;
+            document.getElementById('section-title').textContent = sectionInfo[currentSecNum].title;
+            document.getElementById('section-desc').textContent = sectionInfo[currentSecNum].desc;
+
+            pageQuestions.forEach((q, idx) => {
+                const isAnswered = answers[q.id] !== undefined;
+                const val = answers[q.id];
+
+                const qDiv = document.createElement('div');
+                qDiv.className = 'glass-panel rounded-xl p-6 shadow-sm fade-in border border-slate-100 hover:border-indigo-100 transition-colors';
+                qDiv.style.animationDelay = `${idx * 0.05}s`;
+                
+                qDiv.innerHTML = `
+                    <p class="text-lg font-medium text-slate-800 mb-4"><span class="text-primary font-bold mr-2">${q.id}.</span> ${q.text}</p>
+                    <div class="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start">
+                        ${[1, 2, 3, 4, 5].map(score => `
+                            <button onclick="selectAnswer(${q.id}, ${score})" 
+                                id="btn-q${q.id}-s${score}"
+                                class="scale-btn w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 font-bold text-lg flex items-center justify-center
+                                ${isAnswered && val === score ? 'selected' : 'border-slate-200 text-slate-500 hover:border-primary hover:text-primary'}">
+                                ${score}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div class="flex justify-between w-full max-w-[280px] sm:max-w-[340px] mt-2 text-xs text-slate-400 font-medium px-2">
+                        <span>Strongly Disagree</span>
+                        <span>Strongly Agree</span>
+                    </div>
+                `;
+                container.appendChild(qDiv);
+            });
+
+            document.getElementById('pagination-info').textContent = `Page ${currentPage} of ${totalPages}`;
+            document.getElementById('btn-prev').disabled = currentPage === 1;
+            
+            const nextBtn = document.getElementById('btn-next');
+            if (currentPage === totalPages) {
+                nextBtn.innerHTML = 'Finish <i class="ph ph-check-circle ml-2"></i>';
+                nextBtn.classList.remove('bg-primary');
+                nextBtn.classList.add('bg-secondary');
+            } else {
+                nextBtn.innerHTML = 'Next <i class="ph ph-arrow-right ml-2"></i>';
+                nextBtn.classList.add('bg-primary');
+                nextBtn.classList.remove('bg-secondary');
+            }
+        }
+
+        function selectAnswer(questionId, score) {
+            answers[questionId] = score;
+            // Update UI
+            [1, 2, 3, 4, 5].forEach(s => {
+                const btn = document.getElementById(`btn-q${questionId}-s${s}`);
+                if (btn) {
+                    if (s === score) {
+                        btn.className = "scale-btn w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 font-bold text-lg flex items-center justify-center selected";
+                    } else {
+                        btn.className = "scale-btn w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 font-bold text-lg flex items-center justify-center border-slate-200 text-slate-500 hover:border-primary hover:text-primary";
+                    }
+                }
+            });
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const answeredCount = Object.keys(answers).length;
+            const total = questions.length;
+            const pct = Math.round((answeredCount / total) * 100);
+            
+            document.getElementById('nav-progress-bar').style.width = `${pct}%`;
+            document.getElementById('nav-progress-text').textContent = `${pct}%`;
+        }
+
+        function showToast() {
+            const toast = document.getElementById('error-toast');
+            toast.classList.remove('opacity-0');
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+
+        function nextPage() {
+            // Validate current page
+            const startIndex = (currentPage - 1) * questionsPerPage;
+            const endIndex = Math.min(startIndex + questionsPerPage, questions.length);
+            const pageQuestions = questions.slice(startIndex, endIndex);
+            
+            const allAnswered = pageQuestions.every(q => answers[q.id] !== undefined);
+            
+            if (!allAnswered) {
+                showToast();
+                return;
+            }
+
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderPage();
+            } else {
+                calculateResults();
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderPage();
+            }
+        }
+
+        // --- CALCULATIONS & RESULTS ---
+        function calculateResults() {
+            document.getElementById('assessment-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+            document.getElementById('nav-progress-container').style.display = 'none';
+            
+            // Set Date
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('report-date').textContent = new Date().toLocaleDateString('en-US', options);
+
+            // Tally Scores
+            let scores = {
+                env: { autonomy: 0, structure: 0, innovation: 0, hybrid: 0 },
+                skills: { analytical: 0, creative: 0, leadership: 0, technical: 0, communication: 0 },
+                values: { impact: 0, wealth: 0, growth: 0, balance: 0, recognition: 0 },
+                personality: { openness: 0, conscientiousness: 0, extraversion: 0, agreeableness: 0, emotional_stability: 0 },
+                riasec: { realistic: 0, investigative: 0, artistic: 0, social: 0, enterprising: 0, conventional: 0 }
+            };
+
+            let maxScores = {
+                env: { autonomy: 0, structure: 0, innovation: 0, hybrid: 0 },
+                skills: { analytical: 0, creative: 0, leadership: 0, technical: 0, communication: 0 },
+                values: { impact: 0, wealth: 0, growth: 0, balance: 0, recognition: 0 },
+                personality: { openness: 0, conscientiousness: 0, extraversion: 0, agreeableness: 0, emotional_stability: 0 },
+                riasec: { realistic: 0, investigative: 0, artistic: 0, social: 0, enterprising: 0, conventional: 0 }
+            };
+
+            // Calculate max possible scores
+            questions.forEach(q => {
+                let sectionKey = ['env', 'skills', 'values', 'personality', 'riasec'][q.section - 1];
+                maxScores[sectionKey][q.trait] += 5;
+            });
+
+            // Calculate actual scores
+            Object.keys(answers).forEach(qId => {
+                let q = questions.find(x => x.id == qId);
+                let sectionKey = ['env', 'skills', 'values', 'personality', 'riasec'][q.section - 1];
+                scores[sectionKey][q.trait] += answers[qId];
+            });
+
+            // Convert to percentages and find tops
+            let topTraits = {};
+            
+            Object.keys(scores).forEach(sec => {
+                let secTop = null;
+                let maxPct = -1;
+                let html = '';
+                
+                // Sort traits by percentage
+                let sortedTraits = Object.keys(scores[sec]).map(trait => {
+                    let pct = Math.round((scores[sec][trait] / maxScores[sec][trait]) * 100);
+                    return { trait, pct };
+                }).sort((a, b) => b.pct - a.pct);
+
+                topTraits[sec] = sortedTraits[0].trait; // Save the top trait for summary generation
+
+                sortedTraits.forEach(item => {
+                    // Color logic based on percentage
+                    let color = 'bg-slate-400';
+                    if (item.pct >= 80) color = 'bg-secondary';
+                    else if (item.pct >= 60) color = 'bg-primary';
+
+                    html += `
+                        <div class="mb-2">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="font-semibold text-slate-700 capitalize">${item.trait.replace('_', ' ')}</span>
+                                <span class="text-slate-500 font-bold">${item.pct}%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2.5">
+                                <div class="${color} h-2.5 rounded-full transition-all duration-1000" style="width: 0%" data-width="${item.pct}%"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                document.getElementById(`chart-${sec}`).innerHTML = html;
+            });
+
+            // Animate bars
+            setTimeout(() => {
+                document.querySelectorAll('[data-width]').forEach(el => {
+                    el.style.width = el.getAttribute('data-width');
+                });
+            }, 100);
+
+            generateSummaryAndCareers(topTraits);
+        }
+
+        function generateSummaryAndCareers(topTraits) {
+            // Map top traits to a personalized summary
+            const summaries = {
+                env: {
+                    autonomy: "You thrive when given immense freedom, operating best without micromanagement.",
+                    structure: "You excel in environments with clear guidelines, stable processes, and defined hierarchies.",
+                    innovation: "You are energized by disruption, start-up culture, and pushing boundaries.",
+                    hybrid: "You require flexibility, strong boundaries, and environments that respect deep work."
+                },
+                skills: {
+                    analytical: "Your strongest asset is your ability to dissect data, logic, and complex systems.",
+                    creative: "You shine through your originality, design thinking, and ability to craft narratives.",
+                    leadership: "You possess a natural gravity, capable of aligning teams and driving strategy.",
+                    technical: "You are highly adept at mastering tools, software, and specialized hard skills.",
+                    communication: "You are a master of translation, negotiation, and building interpersonal rapport."
+                },
+                values: {
+                    impact: "Your North Star is leaving the world better than you found it; purpose outweighs profit.",
+                    wealth: "You are driven by aggressive growth, financial independence, and measurable ROI.",
+                    growth: "Continuous learning and intellectual stimulation are non-negotiable for your satisfaction.",
+                    balance: "You prioritize psychological safety, well-being, and a sustainable work-life integration.",
+                    recognition: "You seek visible success, prestige, and to be acknowledged as a top-tier expert."
+                }
+            };
+
+            const summaryText = `Based on your profile, you are a professional who values <strong>${topTraits.env.replace('_',' ')}</strong> in your work environment. Your core aptitude lies in your <strong>${topTraits.skills.replace('_',' ')}</strong> skills, allowing you to excel in specialized tasks. Ultimately, your career decisions are driven by a deep need for <strong>${topTraits.values.replace('_',' ')}</strong>. Combine this with your dominant <strong>${topTraits.personality.replace('_',' ')}</strong> and <strong>${topTraits.riasec.replace('_',' ')}</strong> interests, you are perfectly positioned for roles that require adapting to the 2026 landscape of AI and hybrid structures.`;
+            
+            document.getElementById('executive-summary-text').innerHTML = summaryText;
+
+            // Generate Careers based on a rough matrix of Top RIASEC + Top Skill
+            const careerMatrix = [
+                {
+                    match: (r, s) => r === 'investigative' && s === 'analytical',
+                    category: "AI & Data Strategy",
+                    icon: "ph-brain",
+                    color: "text-indigo-600 bg-indigo-50 border-indigo-200",
+                    jobs: ["AI Ethics Officer", "Machine Learning Data Architect", "Quantum Computing Analyst", "Algorithmic Bias Auditor"]
+                },
+                {
+                    match: (r, s) => r === 'realistic' && (s === 'technical' || s === 'analytical'),
+                    category: "Green Tech & Infrastructure",
+                    icon: "ph-leaf",
+                    color: "text-green-600 bg-green-50 border-green-200",
+                    jobs: ["Carbon Removal Specialist", "Renewable Grid Engineer", "Automated Fleet Manager", "Smart City Planner"]
+                },
+                {
+                    match: (r, s) => r === 'social' && (s === 'communication' || s === 'leadership'),
+                    category: "Future-of-Work & Wellness",
+                    icon: "ph-users-three",
+                    color: "text-rose-600 bg-rose-50 border-rose-200",
+                    jobs: ["Human-AI Collaboration Coach", "Corporate Wellness Director", "Remote Culture Facilitator", "Reskilling Program Architect"]
+                },
+                {
+                    match: (r, s) => r === 'artistic' && (s === 'creative' || s === 'technical'),
+                    category: "Immersive & Synthetic Media",
+                    icon: "ph-paint-brush-broad",
+                    color: "text-fuchsia-600 bg-fuchsia-50 border-fuchsia-200",
+                    jobs: ["Generative Prompt Designer", "VR Narrative Architect", "Sustainable Materials Designer", "Brand Storyteller for Web3"]
+                },
+                {
+                    match: (r, s) => r === 'enterprising' && (s === 'leadership' || s === 'communication'),
+                    category: "Venture & Innovation",
+                    icon: "ph-rocket-launch",
+                    color: "text-amber-600 bg-amber-50 border-amber-200",
+                    jobs: ["Climate Tech Founder", "Fractional Executive (CMO/COO)", "Tech Policy Lobbyist", "Innovation Lab Director"]
+                },
+                {
+                    match: (r, s) => r === 'conventional' && (s === 'analytical' || s === 'technical'),
+                    category: "Governance & Operations",
+                    icon: "ph-shield-check",
+                    color: "text-slate-600 bg-slate-50 border-slate-200",
+                    jobs: ["ESG Compliance Auditor", "Cybersecurity Risk Modeler", "Supply Chain Optimization Lead", "Fintech Regulatory Consultant"]
+                }
+            ];
+
+            // Find matching categories (fallback to general ones if specific logic misses)
+            let matchedCareers = careerMatrix.filter(c => c.match(topTraits.riasec, topTraits.skills));
+            
+            // If strict match fails, just match on RIASEC
+            if (matchedCareers.length === 0) {
+                 matchedCareers = careerMatrix.filter(c => c.match(topTraits.riasec, topTraits.riasec) || c.category.includes("Innovation"));
+                 if(matchedCareers.length === 0) matchedCareers = [careerMatrix[0], careerMatrix[2]]; // Fallback
+            }
+
+            // Ensure we show at least 2 blocks
+            if(matchedCareers.length === 1) {
+                let alt = careerMatrix.find(c => c.category !== matchedCareers[0].category);
+                matchedCareers.push(alt);
+            }
+
+            let careersHtml = '';
+            matchedCareers.slice(0, 4).forEach(cat => {
+                careersHtml += `
+                    <div class="border ${cat.color} rounded-xl p-6 transition-transform hover:scale-105">
+                        <div class="flex items-center mb-4">
+                            <i class="ph ${cat.icon} text-3xl mr-3"></i>
+                            <h4 class="font-bold text-lg">${cat.category}</h4>
+                        </div>
+                        <ul class="space-y-2">
+                            ${cat.jobs.map(job => `<li class="flex items-start text-sm font-medium"><i class="ph-fill ph-check-circle mt-0.5 mr-2 opacity-70"></i> ${job}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            });
+
+            document.getElementById('career-recommendations').innerHTML = careersHtml;
+        }
+
+        // --- PDF EXPORT ---
+        function downloadPDF() {
+            const element = document.getElementById('printable-report');
+            const opt = {
+                margin:       [0.5, 0.5, 0.5, 0.5],
+                filename:     'CIFPA_2026_Career_Report.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            // Add loading state to button
+            const btn = document.querySelector('button[onclick="downloadPDF()"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="ph ph-spinner animate-spin mr-2"></i> Generating PDF...';
+            btn.disabled = true;
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
